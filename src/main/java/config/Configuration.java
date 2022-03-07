@@ -2,8 +2,8 @@ package config;
 
 import structures.BinarySearchTree;
 import structures.BinaryTreeNode;
+import structures.BinaryTreeNodeImplementation;
 import structures.BinaryTreeUtility;
-
 
 /**
  * This class acts as a configuration file which tells the testing framework
@@ -14,21 +14,18 @@ import structures.BinaryTreeUtility;
  */
 public class Configuration {
 
-	
 	public static final String STUDENT_ID_NUMBER = "12345678";
-	
 
-	public static <T> BinaryTreeNode<T> createBinaryTreeNode(BinaryTreeNode<T> left, T elem, BinaryTreeNode<T> right){
+	public static <T> BinaryTreeNode<T> createBinaryTreeNode(BinaryTreeNode<T> left, T elem, BinaryTreeNode<T> right) {
+		return new BinaryTreeNodeImplementation<T>(left, elem, right);
+	}
+
+	public static BinaryTreeUtility createBinaryTreeUtility() {
 		return null;
 	}
-	
-	public static BinaryTreeUtility createBinaryTreeUtility(){
+
+	public static <T extends Comparable<? super T>> BinarySearchTree<T> createBinarySearchTree() {
 		return null;
 	}
-	
-	public static <T extends Comparable<? super T>> BinarySearchTree<T> createBinarySearchTree(){
-		return null;
-	}
-	
 
 }
