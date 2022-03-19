@@ -5,7 +5,8 @@ import java.util.Iterator;
 import recursiveIterators.InOrderIteratorRecursive;
 
 /**
- * Represents a Linked Binary Search Tree structure
+ * Represents a Linked Binary Search Tree structure to search through a binary
+ * tree.
  * 
  * @author sagesilberman
  *
