@@ -5,7 +5,7 @@ import java.util.Iterator;
 import recursiveIterators.InOrderIteratorRecursive;
 
 /**
- * Represents a Binary Search Tree structure
+ * Represents a Linked Binary Search Tree structure
  * 
  * @author sagesilberman
  *
@@ -13,7 +13,7 @@ import recursiveIterators.InOrderIteratorRecursive;
  */
 public class BinarySearchTreeImplementation<T extends Comparable<? super T>> implements BinarySearchTree<T> {
 
-	private BinaryTreeNode<T> root; // The root of the tree
+	private BinaryTreeNode<T> root; // the root of the tree
 	private int count; // the count
 
 	/**
@@ -57,8 +57,10 @@ public class BinarySearchTreeImplementation<T extends Comparable<? super T>> imp
 	}
 
 	/**
-	 * @param element
-	 * @param node
+	 * Adds a new element to the tree depending on the node
+	 * 
+	 * @param element the element of the tree
+	 * @param node    of the tree
 	 */
 	private void addElement(T element, BinaryTreeNode<T> node) {
 		if (element.compareTo(node.getData()) <= 0) {
@@ -141,17 +143,17 @@ public class BinarySearchTreeImplementation<T extends Comparable<? super T>> imp
 				}
 			}
 		}
-//	if (result == null) {
-//	return false;
-//	}
+
 		return true;
 	}
 
 	/**
-	 * @param toRemove
-	 * @param node
-	 * @param parent
-	 * @return
+	 * Returns the removed element from the tree
+	 * 
+	 * @param toRemove the node that is being removed
+	 * @param node     the current node
+	 * @param parent   the parent node
+	 * @return the node's data
 	 */
 	private T removeElement(T toRemove, BinaryTreeNode<T> node, BinaryTreeNode<T> parent) {
 		T result = null;
@@ -181,8 +183,10 @@ public class BinarySearchTreeImplementation<T extends Comparable<? super T>> imp
 	}
 
 	/**
-	 * @param node
-	 * @return
+	 * Returns the current replaced node of the right or left child.
+	 * 
+	 * @param node the current node
+	 * @return the replaced node
 	 */
 	private BinaryTreeNode<T> replacement(BinaryTreeNode<T> node) {
 		if (!node.hasLeftChild() && !node.hasRightChild()) {
@@ -233,8 +237,10 @@ public class BinarySearchTreeImplementation<T extends Comparable<? super T>> imp
 	}
 
 	/**
-	 * @param currentNode
-	 * @return
+	 * Returns the minimum current node by recursing left
+	 * 
+	 * @param currentNode the node it's at
+	 * @return the minimum node
 	 */
 	private T getMinimum(BinaryTreeNode<T> currentNode) {
 		if (isEmpty()) {
@@ -253,8 +259,10 @@ public class BinarySearchTreeImplementation<T extends Comparable<? super T>> imp
 	}
 
 	/**
-	 * @param currentNode
-	 * @return
+	 * Returns the maximum current node by recursing right
+	 * 
+	 * @param currentNode the node it's at
+	 * @return the maximum node
 	 */
 	private T getMaximum(BinaryTreeNode<T> currentNode) {
 		if (isEmpty()) {

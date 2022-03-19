@@ -5,7 +5,6 @@ import java.util.Iterator;
 import nonRecursiveIterators.InOrderIterator;
 import nonRecursiveIterators.LevelOrderIterator;
 import nonRecursiveIterators.PostOrderIterator;
-import nonRecursiveIterators.PreOrderIterator;
 import recursiveIterators.PreOrderIteratorRecursive;
 
 /**

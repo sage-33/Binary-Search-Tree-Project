@@ -25,6 +25,19 @@ public class BinarySearchTreeTest {
 		assertNotNull("It looks like you did not set createBinarySearchTree in your configuration file.", tree);
 	}
 
+// Logic test for Add and is empty
+	@Test(timeout = 100)
+	public void testAddAndIsEmpty2() {
+		assertTrue("Fresh tree should be empty.", tree.isEmpty());
+		assertEquals("Fresh tree should have size 0.", 0, tree.size());
+		assertEquals("Add should return tree for convenience.", tree, tree.add(100));
+		assertFalse("Tree should now be non-empty.", tree.isEmpty());
+		assertEquals("Size should now be 1.", 1, tree.size());
+		assertEquals("Add should return tree for convenience.", tree, tree.add(50));
+		assertFalse("Tree should now be non-empty.", tree.isEmpty());
+		assertEquals("Size should now be 2.", 2, tree.size());
+	}
+
 	@Test(timeout = 100)
 	public void testSimpleAddSizeAndIsEmpty() {
 		assertTrue("Fresh tree should be empty.", tree.isEmpty());
@@ -43,6 +56,23 @@ public class BinarySearchTreeTest {
 		assertEquals("Size should now be 4.", 4, tree.size());
 	}
 
+// Test Contains and add again
+	@Test(timeout = 100)
+	public void testAddAndContains2() {
+		assertFalse("Tree should not contain anything.", tree.contains(400));
+		assertEquals("Add should return tree for convenience.", tree, tree.add(2));
+		assertTrue("After add, contains should return true.", tree.contains(2));
+
+		assertFalse("Tree should not contain 5.", tree.contains(5));
+		assertEquals("Add should return tree for convenience.", tree, tree.add(77));
+		System.out.println(tree.toBinaryTreeNode().getData());
+		System.out.println(tree.toBinaryTreeNode().getRightChild().getData());
+		assertTrue("After add, contains should return true.", tree.contains(77));
+		assertEquals("Add should return tree for convenience.", tree, tree.add(500));
+		assertTrue("After add, contains should return true.", tree.contains(500));
+
+	}
+
 	@Test(timeout = 100)
 	public void testSimpleAddAndContains() {
 		assertFalse("Tree should not contain anything.", tree.contains(1));
@@ -51,6 +81,8 @@ public class BinarySearchTreeTest {
 
 		assertFalse("Tree should not contain 5.", tree.contains(5));
 		assertEquals("Add should return tree for convenience.", tree, tree.add(5));
+		System.out.println(tree.toBinaryTreeNode().getData());
+		System.out.println(tree.toBinaryTreeNode().getRightChild().getData());
 		assertTrue("After add, contains should return true.", tree.contains(5));
 
 	}
@@ -58,6 +90,25 @@ public class BinarySearchTreeTest {
 	@Test(timeout = 1000)
 	public void testRandomAddContains() {
 		Random r = new Random(42);
+		Set<Integer> valuesAdded = new HashSet<Integer>();
+		for (int i = 0; i < SPEED_TEST; i++) {
+			assertEquals("Tree should have i elements in it.", i, tree.size());
+			int next = r.nextInt();
+
+			if (!valuesAdded.contains(next)) {
+				assertFalse("Tree should not contain this value yet.", tree.contains(next));
+				valuesAdded.add(next);
+			}
+
+			assertEquals("Add should return tree for convenience.", tree, tree.add(next));
+			assertTrue("After add, contains should return true.", tree.contains(next));
+		}
+	}
+
+// Logic for random add + contains. idk how to make this different tbh
+	@Test(timeout = 1000)
+	public void testRandomAddContains2() {
+		Random r = new Random(69);
 		Set<Integer> valuesAdded = new HashSet<Integer>();
 		for (int i = 0; i < SPEED_TEST; i++) {
 			assertEquals("Tree should have i elements in it.", i, tree.size());
@@ -83,7 +134,22 @@ public class BinarySearchTreeTest {
 		tree.contains(null);
 	}
 
-	@Test // (timeout = 100)
+// Logic test for remove method
+	@Test(timeout = 100)
+	public void testRemove() {
+		assertEquals("Add should return tree for convenience", tree, tree.add(69));
+		assertEquals("Add should return tree for convenience", tree, tree.add(420));
+		assertEquals("Add should return tree for convenience", tree, tree.add(7));
+
+		assertEquals(3, tree.size());
+		assertTrue(tree.remove(69));
+		assertEquals(2, tree.size());
+		assertTrue(tree.remove(420));
+		assertEquals(1, tree.size());
+		assertFalse(tree.isEmpty());
+	}
+
+	@Test(timeout = 100)
 	public void testSimpleAddRemoveAndSize() {
 		assertEquals("Add should return tree for convenience.", tree, tree.add(1));
 		assertEquals("Add should return tree for convenience.", tree, tree.add(5));
@@ -118,6 +184,7 @@ public class BinarySearchTreeTest {
 			assertEquals("Add should return tree for convenience.", tree, tree.add(next));
 			assertTrue("After add, contains should return true.", tree.contains(next));
 		}
+		System.out.println(valuesAdded);
 
 		assertEquals(SPEED_TEST, tree.size());
 		for (Integer i : valuesAdded) {
@@ -126,6 +193,44 @@ public class BinarySearchTreeTest {
 		}
 		assertEquals(0, tree.size());
 		assertTrue(tree.isEmpty());
+	}
+
+	@Test(timeout = 1000)
+	public void testDumbTest() {
+// 0, 3, 8, 4, 0, 5, 5, 8, 9, 3]
+		List<Integer> valuesAdded = new LinkedList<Integer>();
+		valuesAdded.add(0);
+		valuesAdded.add(3);
+		valuesAdded.add(8);
+		valuesAdded.add(4);
+		valuesAdded.add(0);
+		tree.add(0);
+		tree.add(3);
+		tree.add(8);
+		tree.add(4);
+		tree.add(0);
+
+// assertEquals(SPEED_TEST, tree.size());
+		for (Integer i : valuesAdded) {
+			assertTrue("Could not remove previously added node.", tree.remove(i));
+
+		}
+		assertEquals(0, tree.size());
+		assertTrue(tree.isEmpty());
+	}
+
+// Logic Test for getmin + max
+	@Test(timeout = 100)
+	public void testGetMinAndMax() {
+		tree.add(69).add(420).add(7).add(15).add(4).add(5);
+		assertEquals(new Integer(4), tree.getMinimum());
+		assertEquals(new Integer(420), tree.getMaximum());
+	}
+
+	@Test(timeout = 100)
+	public void testSize() {
+		tree.add(1).add(2).add(3);
+		assertEquals(3, tree.size());
 	}
 
 	@Test(timeout = 100)
@@ -162,6 +267,25 @@ public class BinarySearchTreeTest {
 	@Test(timeout = 100, expected = IllegalStateException.class)
 	public void testIllegalStateGetMax() {
 		tree.getMaximum();
+	}
+
+// logic Test for simple iterable
+	@Test(timeout = 100)
+	public void testSimpleIterable2() {
+		tree.add(2).add(4).add(6).add(9).add(4).add(2).add(1);
+		LinkedList<Integer> values = new LinkedList<Integer>();
+		values.add(1);
+		values.add(2);
+		values.add(2);
+		values.add(4);
+		values.add(4);
+		values.add(6);
+		values.add(9);
+		for (Integer i : tree) {
+			Integer toCheck = values.remove();
+			assertEquals(toCheck, i);
+		}
+
 	}
 
 	@Test(timeout = 100)
