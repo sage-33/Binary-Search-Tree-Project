@@ -21,7 +21,7 @@ public class BinaryTreeNodeImplementation<T> implements BinaryTreeNode<T> {
 	 * @param left  the left most element that will become a part of the new tree
 	 *              node
 	 * @param elem  the element that will become a part of the new tree node
-	 * @param right the left most element that will become a part of the new tree
+	 * @param right the right most element that will become a part of the new tree
 	 *              node
 	 */
 	public BinaryTreeNodeImplementation(BinaryTreeNode<T> left, T elem, BinaryTreeNode<T> right) {
@@ -71,16 +71,11 @@ public class BinaryTreeNodeImplementation<T> implements BinaryTreeNode<T> {
 
 	@Override
 	public void setLeftChild(BinaryTreeNode<T> left) {
-		if (left != null) {
-			this.left = left;
-		}
+		this.left = left;
 	}
 
 	@Override
 	public void setRightChild(BinaryTreeNode<T> right) {
-		if (right != null) {
-			this.right = right;
-		}
+		this.right = right;
 	}
-
 }

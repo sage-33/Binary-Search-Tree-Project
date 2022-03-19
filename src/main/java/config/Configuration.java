@@ -1,9 +1,11 @@
 package config;
 
 import structures.BinarySearchTree;
+import structures.BinarySearchTreeImplementation;
 import structures.BinaryTreeNode;
 import structures.BinaryTreeNodeImplementation;
 import structures.BinaryTreeUtility;
+import structures.BinaryTreeUtilityImplementation;
 
 /**
  * This class acts as a configuration file which tells the testing framework
@@ -21,11 +23,11 @@ public class Configuration {
 	}
 
 	public static BinaryTreeUtility createBinaryTreeUtility() {
-		return null;
+		return new BinaryTreeUtilityImplementation();
 	}
 
 	public static <T extends Comparable<? super T>> BinarySearchTree<T> createBinarySearchTree() {
-		return null;
+		return new BinarySearchTreeImplementation<T>();
 	}
 
 }
